@@ -1,7 +1,10 @@
 Setup for OO Boot Camp labs in C#
 
+  Copyright (c) 2017 by Fred George
+  May be used freely except for training; license required for training.
+
 Tools:
-  Visual Studio 2017 - Community Edition
+  Visual Studio 2015 - Community Edition
   JetBrains ReSharper for C#
 
 Create a directory for labs:
@@ -9,7 +12,7 @@ Create a directory for labs:
   
 In Visual Studio, create a new solution:
   File / New / Project...
-    Visual C# / Class Library (Universal Windows)
+    Visual C# / Class Library <without modifiers/qualifiers>
     Name: OoBootCamp
     Location: The labs directory you created above
     Solution: OoBootCamp
@@ -17,11 +20,10 @@ In Visual Studio, create a new solution:
   An empty class (Class1) gets created. Ignore it for now.
 
 In Visual Studio, create a test project:
-  File / Add / Project
-    Visual C# / Class Library (Universal Windows)
+  File / Add / New Project...
+    Visual C# / Class Library <without modifiers/qualifiers>
     Name: OoBootCamp.Tests
     Location: The labs directory you created above
-    _uncheck_ Create directory for solution (no new directory, please)
   Another empty class (Class1) gets created. Ignore it also for now.
 
 Now we need to create a dependency of the tests on the source code.
@@ -31,7 +33,7 @@ In Visual Studio, open the solution properties:
   In 'Common Properties', select 'Startup Project'
     Single startup project: OoBootCamp.tests
   In 'Project Dependencies', select the 'Projects: OoBootCamp.Tests'
-    Check the 'Depends on: OoBootCamp'
+    Check the 'Depends on: OoBootCamp', and click OK
 
 We use NUnit for our unit tests. It needs to be installed into the 
 OoBootCamp.Tests project. Use NuGet to fetch it:
@@ -39,7 +41,9 @@ OoBootCamp.Tests project. Use NuGet to fetch it:
     Tools / NuGet Package Manager / Manage NuGet Packages for Solution...
       Browse tab
         Enter 'NUnit' in the Search field
-        Select NUnit by Charlie Poole, and install it
+        Select NUnit by Charlie Poole
+          For Version:, select latest stable
+          Click Install
           A console window will show you the progress
 
 Setup the first test, a test of Rectangle:
@@ -52,7 +56,7 @@ Setup the first test, a test of Rectangle:
       [Test]
       public void Area()
       {
-          Assert.AreEqual(24, new Rectangle(4, 6).Area());
+          Assert.AreEqual(24, new Rectangle(4.0, 6.0).Area());
       }
     Let VS use Rectangle from the OoBootCamp project
   Correct the other compile errors, one by one

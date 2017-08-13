@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoBootCamp", "OoBootCamp.csproj", "{5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoBootCamp.Tests", "..\OoBootCamp.Tests\OoBootCamp.Tests.csproj", "{DDA2A6D1-A107-48E9-9F15-FD9AFAD42E01}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA} = {5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5863D5FF-BA58-4E4C-A1BD-67807CBFBBEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA2A6D1-A107-48E9-9F15-FD9AFAD42E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA2A6D1-A107-48E9-9F15-FD9AFAD42E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA2A6D1-A107-48E9-9F15-FD9AFAD42E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA2A6D1-A107-48E9-9F15-FD9AFAD42E01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
