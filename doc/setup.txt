@@ -1,0 +1,62 @@
+Setup for OO Boot Camp labs in C#
+
+Tools:
+  Visual Studio 2017 - Community Edition
+  JetBrains ReSharper for C#
+
+Create a directory for labs:
+  oo_boot_camp_YYYY-MM-DD_csharp
+  
+In Visual Studio, create a new solution:
+  File / New / Project...
+    Visual C# / Class Library <NOT the Core one, either>
+    Name: OoBootCamp
+    Location: The labs directory you created above
+    Solution: OoBootCamp
+    _uncheck_ Create directory for solution (no new directory, please)
+  An empty class (Class1) gets created. Ignore it for now.
+
+In Visual Studio, create a test project:
+  File / Add / Project
+    Visual C# / Class Library <NOT the Core one, either>
+    Name: OoBootCamp.Tests
+    Location: The labs directory you created above
+    _uncheck_ Create directory for solution (no new directory, please)
+  Another empty class (Class1) gets created. Ignore it also for now.
+
+Now we need to create a dependency of the tests on the source code.
+In Visual Studio, open the solution properties:
+  Selection "Solution 'OoBootCamp'" in the Solution Explorer
+  Right click on the solution, and select "Properties"
+  In 'Common Properties', select 'Startup Project'
+    Single startup project: OoBootCamp.tests
+  In 'Project Dependencies', select the 'Projects: OoBootCamp.Tests'
+    Check the 'Depends on: OoBootCamp'
+
+We use NUnit for our unit tests. It needs to be installed into the 
+OoBootCamp.Tests project. Use NuGet to fetch it:
+  Select (click on) the OoBootCamp.Tests in the Solution Explorer. Then select:
+    Tools / NuGet Package Manager / Manage NuGet Packages for Solution...
+      Browse tab
+        Enter 'NUnit' in the Search field
+        Select NUnit by Charlie Poole, and install it
+          A console window will show you the progress
+
+Setup the first test, a test of Rectangle:
+  Rename the 'Class1' in the OoBootCamp to 'Rectangle' (file and class name)
+  Rename the 'Class1' in the OoBootCamp.Tests to 'RectangleTest' (file and class name)
+    Just before the class declaration, decorate the class with:
+      [TestFixture]
+    Let the VS import the NUnit framework for you
+    Add an assertion for Rectangle:
+      [Test]
+      public void Area()
+      {
+          Assert.AreEqual(24, new Rectangle(4, 6).Area());
+      }
+    Let VS use Rectangle from the OoBootCamp project
+  Correct the other compile errors, one by one
+  When all the compile errors are gone, run the Unit tests:
+    ReSharper / Unit Tests / Run All Unit Tests from Solution
+
+Speed hint: Customize the Standard tool bar and add ReSharper's Run All Unit Tests
