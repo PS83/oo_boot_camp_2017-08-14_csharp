@@ -9,7 +9,7 @@ Create a directory for labs:
   
 In Visual Studio, create a new solution:
   File / New / Project...
-    Visual C# / Class Library <NOT the Core one, either>
+    Visual C# / Class Library (Universal Windows)
     Name: OoBootCamp
     Location: The labs directory you created above
     Solution: OoBootCamp
@@ -18,7 +18,7 @@ In Visual Studio, create a new solution:
 
 In Visual Studio, create a test project:
   File / Add / Project
-    Visual C# / Class Library <NOT the Core one, either>
+    Visual C# / Class Library (Universal Windows)
     Name: OoBootCamp.Tests
     Location: The labs directory you created above
     _uncheck_ Create directory for solution (no new directory, please)
