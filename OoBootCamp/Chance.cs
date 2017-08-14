@@ -42,6 +42,10 @@ namespace OoBootCamp
         public static Chance operator !(Chance c) => new Chance(CertainFraction - c._fraction);
 
         public Chance Not() => !this;
+
+        public Chance And(Chance other) => new Chance(this._fraction * other._fraction);
+
+        public static Chance operator &(Chance left, Chance right) => left.And(right);
     }
 
 
