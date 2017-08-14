@@ -11,17 +11,34 @@ namespace OoBootCamp.Tests
     [TestFixture]
     public class ChanceTest
     {
+        private static readonly Chance Impossible = new Chance(0.0);
+        private static readonly Chance Unlikely = new Chance(0.25);
+        private static readonly Chance EquallyLikely = new Chance(0.5);
+        private static readonly Chance Likely = new Chance(0.75);
+        private static readonly Chance Certain = new Chance(1.0);
+
         public void Equality()
         {
-            Assert.AreEqual(new Chance(0.75), new Chance(0.75));
-            Assert.AreNotEqual(new Chance(0.75), new object());
-            Assert.AreNotEqual(new Chance(0.75), null);
+            Assert.AreEqual(new Chance(0.75), Likely);
+            Assert.AreNotEqual(Likely, new object());
+            Assert.AreNotEqual(Likely, null);
         }
 
         [Test]
         public void Hash()
         {
-            Assert.AreEqual(new Chance(0.75).GetHashCode(), new Chance(0.75).GetHashCode());
+            Assert.AreEqual(new Chance(0.75).GetHashCode(), Likely.GetHashCode());
         }
+
+        [Test]
+        public void Not()
+        {
+            Assert.AreEqual(Unlikely, !Likely);
+            Assert.AreEqual(Likely, !!Likely);
+            Assert.AreEqual(Likely, Likely.Not().Not());
+            Assert.AreEqual(Impossible, !Certain);
+            Assert.AreEqual(Certain, !Impossible);
+        }
+
     }
 }

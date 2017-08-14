@@ -10,7 +10,9 @@ namespace OoBootCamp
     // Understands the likelihood of something occurring
     public class Chance : IEquatable<Chance>
     {
+        private const double CertainFraction = 1.0;
         private readonly double _fraction;
+
 
         public Chance(double likelihoodAsFraction)
         {
@@ -36,6 +38,10 @@ namespace OoBootCamp
         {
             return _fraction.GetHashCode();
         }
+
+        public static Chance operator !(Chance c) => new Chance(CertainFraction - c._fraction);
+
+        public Chance Not() => !this;
     }
 
 
