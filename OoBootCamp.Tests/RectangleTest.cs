@@ -2,8 +2,7 @@
  * Copyright (c) 2017 by Fred George
  * May be used freely except for training; license required for training.
  */
-
-using System;
+ 
 using NUnit.Framework;
 
 namespace OoBootCamp.Tests
@@ -22,6 +21,13 @@ namespace OoBootCamp.Tests
         public void Perimeter()
         {
             Assert.AreEqual(20.0, new Rectangle(4.0, 6.0).Perimeter());
+        }
+
+        [Test]
+        public void InvalidRectangles()
+        {
+            Assert.That(() => new Rectangle(0, 1), Throws.ArgumentException);
+            Assert.That(() => new Rectangle(1, 0), Throws.ArgumentException);
         }
     }
 }
