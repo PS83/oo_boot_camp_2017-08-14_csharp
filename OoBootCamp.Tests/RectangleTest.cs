@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace OoBootCamp.Tests
 {
-    // Ensures Rectangle works correctlyS
+    // Ensures Rectangle works correctly
     [TestFixture]
     public class RectangleTest
     {
