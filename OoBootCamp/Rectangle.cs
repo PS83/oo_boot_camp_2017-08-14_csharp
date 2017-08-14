@@ -21,5 +21,10 @@ namespace OoBootCamp
         {
             return _height * _width;
         }
+
+        public double Perimeter()
+        {
+            return 2 * (_height + _width);
+        }
     }
 }
