@@ -9,14 +9,11 @@ namespace OoBootCamp.Quantities
 {
     public class Quantity : IEquatable<Quantity>
     {
-        public static readonly object Teaspoon = new object();
-        public static readonly object Tablespoon = new object();
-        public static readonly object Ounce = new object();
-
+        private static readonly double Tolerance = 1e-6;
         private readonly double _amount;
-        private readonly object _unit;
+        private readonly Unit _unit;
 
-        public Quantity(double amount, object unit)
+        internal Quantity(double amount, Unit unit)
         {
             _amount = amount;
             _unit = unit;
@@ -26,7 +23,12 @@ namespace OoBootCamp.Quantities
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return this._amount.Equals(other._amount) && Equals(this._unit, other._unit);
+            return Math.Abs(this._amount - ConvertedAmount(other)) < Tolerance;
+        }
+
+        private double ConvertedAmount(Quantity other)
+        {
+            return this._unit.ConvertedAmount(other._amount, other._unit);
         }
 
         public override bool Equals(object other)
