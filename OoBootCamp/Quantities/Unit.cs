@@ -4,6 +4,7 @@
  */
 
 using System;
+using static OoBootCamp.Quantities.Unit;
 
 namespace OoBootCamp.Quantities
 {
@@ -44,6 +45,27 @@ namespace OoBootCamp.Quantities
         internal int HashCode(double amount)
         {
             return Math.Round(amount * _baseUnitRatio, DecimalPlaceCount).GetHashCode();
+        }
+    }
+
+    namespace ExtensionMethods
+    {
+        public static class QuantityConstructors
+        {
+            public static Quantity Teaspoons(this double amount) => Teaspoon.S(amount);
+            public static Quantity Teaspoons(this int amount) => Teaspoon.S(amount);
+            public static Quantity Tablespoons(this double amount) => Tablespoon.S(amount);
+            public static Quantity Tablespoons(this int amount) => Tablespoon.S(amount);
+            public static Quantity Ounces(this double amount) => Ounce.S(amount);
+            public static Quantity Ounces(this int amount) => Ounce.S(amount);
+            public static Quantity Cups(this double amount) => Cup.S(amount);
+            public static Quantity Cups(this int amount) => Cup.S(amount);
+            public static Quantity Pints(this double amount) => Pint.S(amount);
+            public static Quantity Pints(this int amount) => Pint.S(amount);
+            public static Quantity Quarts(this double amount) => Quart.S(amount);
+            public static Quantity Quarts(this int amount) => Quart.S(amount);
+            public static Quantity Gallons(this double amount) => Gallon.S(amount);
+            public static Quantity Gallons(this int amount) => Gallon.S(amount);
         }
     }
 }

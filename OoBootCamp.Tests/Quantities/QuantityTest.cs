@@ -4,6 +4,7 @@
  */
 
 using NUnit.Framework;
+using OoBootCamp.Quantities.ExtensionMethods;
 using static OoBootCamp.Quantities.Unit;
 
 namespace OoBootCamp.Tests.Quantities
@@ -30,6 +31,12 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(Cup.S(0.5), Tablespoon.S(8));
             Assert.AreEqual(Gallon.S(2), Teaspoon.S(1536));
             Assert.AreNotEqual(Cup.S(6), Tablespoon.S(6));
+
+            Assert.AreEqual(6.Tablespoons(), 3.Ounces());
+            Assert.AreEqual(8.Tablespoons(), 0.5.Cups());
+            Assert.AreEqual(0.5.Cups(), 8.Tablespoons());
+            Assert.AreEqual(2.Gallons(), 1536.Teaspoons());
+            Assert.AreNotEqual(6.Cups(), 6.Tablespoons());
         }
 
         [Test]
