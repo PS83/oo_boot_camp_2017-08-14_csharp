@@ -53,5 +53,15 @@ namespace OoBootCamp.Tests
             Assert.AreEqual(Impossible, Impossible & Likely);
         }
 
+        [Test]
+        public void Or()
+        {
+            Assert.AreEqual(Likely, EquallyLikely | EquallyLikely);
+            Assert.AreEqual(new Chance(0.8125), Likely | Unlikely);
+            Assert.AreEqual(Unlikely.Or(Likely), Likely | Unlikely);
+            Assert.AreEqual(Certain, Likely | Certain);
+            Assert.AreEqual(Likely, Impossible | Likely);
+        }
+
     }
 }
