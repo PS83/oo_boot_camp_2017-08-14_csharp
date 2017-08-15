@@ -18,6 +18,7 @@ namespace OoBootCamp
 
         public Chance(double likelihoodAsFraction)
         {
+            if (likelihoodAsFraction < 0.0 || likelihoodAsFraction > 1.0) throw new ArgumentException("Fraction must be between 0 and 1");
             _fraction = likelihoodAsFraction;
         }
 
@@ -48,6 +49,7 @@ namespace OoBootCamp
 
         public static Chance operator &(Chance left, Chance right) => left.And(right);
 
+        // DeMorgan's Law: https://en.wikipedia.org/wiki/De_Morgan%27s_laws
         public static Chance operator |(Chance left, Chance right) => !(!left & !right);
 
         public Chance Or(Chance other) => this | other;

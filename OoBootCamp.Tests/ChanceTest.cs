@@ -63,5 +63,12 @@ namespace OoBootCamp.Tests
             Assert.AreEqual(Likely, Impossible | Likely);
         }
 
+        [Test]
+        public void ValidFractions()
+        {
+            Assert.That(() => new Chance(1.1), Throws.ArgumentException);
+            Assert.That(() => new Chance(-0.1), Throws.ArgumentException);
+        }
+
     }
 }
