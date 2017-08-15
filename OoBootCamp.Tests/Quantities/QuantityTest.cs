@@ -3,9 +3,7 @@
  * May be used freely except for training; license required for training.
  */
 
-using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using OoBootCamp.Quantities;
 using static OoBootCamp.Quantities.Quantity;
 
