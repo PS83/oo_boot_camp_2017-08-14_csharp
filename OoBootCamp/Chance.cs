@@ -4,6 +4,7 @@
  */
 
 using System;
+using OoBootCamp;
 
 namespace OoBootCamp
 {
@@ -21,17 +22,16 @@ namespace OoBootCamp
 
         public bool Equals(Chance other)
         {
-            if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other)) return false;
             return this._fraction.Equals(other._fraction);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Chance) obj);
+            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other)) return false;
+            return other.GetType() == this.GetType() && Equals((Chance) other);
         }
 
         public override int GetHashCode()
@@ -47,6 +47,14 @@ namespace OoBootCamp
 
         public static Chance operator &(Chance left, Chance right) => left.And(right);
     }
+}
 
+namespace ExtensionMethods
+{
+    public static class ChanceConstructors
+    {
+        public static Chance Chance(this double fraction) => new Chance(fraction);
 
+        public static Chance Chance(this int wholeNumber) => new Chance(wholeNumber);
+    }
 }

@@ -4,6 +4,7 @@
  */
 
 using NUnit.Framework;
+using ExtensionMethods;
 
 namespace OoBootCamp.Tests
 {
@@ -12,14 +13,16 @@ namespace OoBootCamp.Tests
     public class ChanceTest
     {
         private static readonly Chance Impossible = new Chance(0.0);
-        private static readonly Chance Unlikely = new Chance(0.25);
-        private static readonly Chance EquallyLikely = new Chance(0.5);
-        private static readonly Chance Likely = new Chance(0.75);
-        private static readonly Chance Certain = new Chance(1.0);
+        private static readonly Chance Unlikely = 0.25.Chance();
+        private static readonly Chance EquallyLikely = 0.5.Chance();
+        private static readonly Chance Likely = 0.75.Chance();
+        private static readonly Chance Certain = 1.Chance();
 
+        [Test]
         public void Equality()
         {
             Assert.AreEqual(new Chance(0.75), Likely);
+            Assert.AreEqual(0.75.Chance(), 0.75.Chance());
             Assert.AreNotEqual(Likely, new object());
             Assert.AreNotEqual(Likely, null);
         }
