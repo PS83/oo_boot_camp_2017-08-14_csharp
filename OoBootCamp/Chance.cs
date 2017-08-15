@@ -12,6 +12,7 @@ namespace OoBootCamp
     public class Chance : IEquatable<Chance>
     {
         private const double CertainFraction = 1.0;
+        private const double Tolerance = 1e-6;
         private readonly double _fraction;
 
 
@@ -24,7 +25,7 @@ namespace OoBootCamp
         {
             if (ReferenceEquals(this, other)) return true;
             if (ReferenceEquals(null, other)) return false;
-            return this._fraction.Equals(other._fraction);
+            return Math.Abs(this._fraction - other._fraction) < Tolerance;
         }
 
         public override bool Equals(object other)
@@ -36,7 +37,7 @@ namespace OoBootCamp
 
         public override int GetHashCode()
         {
-            return _fraction.GetHashCode();
+            return Math.Round(_fraction, 6).GetHashCode();
         }
 
         public static Chance operator !(Chance c) => new Chance(CertainFraction - c._fraction);
