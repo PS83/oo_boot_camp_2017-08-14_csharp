@@ -31,5 +31,11 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(Gallon.S(2), Teaspoon.S(1536));
             Assert.AreNotEqual(Cup.S(6), Tablespoon.S(6));
         }
+
+        [Test]
+        public void Hash()
+        {
+            Assert.AreEqual(Tablespoon.S(8).GetHashCode(), Cup.S(0.5).GetHashCode());
+        }
     }
 }

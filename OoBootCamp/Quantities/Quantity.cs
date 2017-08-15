@@ -40,10 +40,7 @@ namespace OoBootCamp.Quantities
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return (_amount.GetHashCode() * 397) ^ (_unit != null ? _unit.GetHashCode() : 0);
-            }
+            return _unit.HashCode(_amount);
         }
     }
 }

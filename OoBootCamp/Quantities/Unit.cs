@@ -3,6 +3,8 @@
  * May be used freely except for training; license required for training.
  */
 
+using System;
+
 namespace OoBootCamp.Quantities
 {
     // Understands a specific metric
@@ -16,6 +18,7 @@ namespace OoBootCamp.Quantities
         public static readonly Unit Quart = new Unit(2, Pint);
         public static readonly Unit Gallon = new Unit(4, Quart);
 
+        private static readonly int DecimalPlaceCount = 6;
         private readonly double _baseUnitRatio;
 
         public Unit()
@@ -36,6 +39,11 @@ namespace OoBootCamp.Quantities
         internal double ConvertedAmount(double otherAmount, Unit other)
         {
             return otherAmount * other._baseUnitRatio / this._baseUnitRatio;
+        }
+
+        internal int HashCode(double amount)
+        {
+            return Math.Round(amount * _baseUnitRatio, DecimalPlaceCount).GetHashCode();
         }
     }
 }
