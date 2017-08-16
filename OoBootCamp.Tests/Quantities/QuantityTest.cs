@@ -45,6 +45,20 @@ namespace OoBootCamp.Tests.Quantities
         }
 
         [Test]
+        public void TemperatureEquality()
+        {
+            Assert.AreEqual(Celsius.Es(0), Fahrenheit.S(32));
+            Assert.AreEqual(Fahrenheit.S(32), Celsius.Es(0));
+            Assert.AreEqual(Celsius.Es(-40), Fahrenheit.S(-40));
+            Assert.AreEqual(Fahrenheit.S(-40), Celsius.Es(-40));
+            Assert.AreEqual(Celsius.Es(10), Fahrenheit.S(50));
+            Assert.AreEqual(Fahrenheit.S(50), Celsius.Es(10));
+            Assert.AreEqual(Celsius.Es(100), Fahrenheit.S(212));
+            Assert.AreEqual(Fahrenheit.S(212), Celsius.Es(100));
+        }
+
+
+        [Test]
         public void Hash()
         {
             Assert.AreEqual(Tablespoon.S(8).GetHashCode(), Cup.S(0.5).GetHashCode());
