@@ -32,12 +32,16 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(Gallon.S(2), Teaspoon.S(1536));
             Assert.AreNotEqual(Cup.S(6), Tablespoon.S(6));
             Assert.AreEqual(Inch.S(126720), Mile.S(2));
+            Assert.AreNotEqual(Inch.Es(1), Teaspoon.S(1));
+            Assert.AreNotEqual(Foot.S(2), Cup.S(0.5));
 
             Assert.AreEqual(6.Tablespoons(), 3.Ounces());
             Assert.AreEqual(8.Tablespoons(), 0.5.Cups());
             Assert.AreEqual(0.5.Cups(), 8.Tablespoons());
             Assert.AreEqual(2.Gallons(), 1536.Teaspoons());
             Assert.AreNotEqual(6.Cups(), 6.Tablespoons());
+            Assert.AreNotEqual(1.Inches(), 1.Teaspoons());
+            Assert.AreNotEqual(2.Feet(), 0.5.Cups());
         }
 
         [Test]

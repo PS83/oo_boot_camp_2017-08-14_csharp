@@ -27,14 +27,17 @@ namespace OoBootCamp.Quantities
 
         private static readonly int DecimalPlaceCount = 6;
         private readonly double _baseUnitRatio;
+        private readonly Unit _baseUnit;
 
         public Unit()
         {
+            _baseUnit = this;
             _baseUnitRatio = 1;
         }
 
         public Unit(double relativeRatio, Unit relativeUnit)
         {
+            _baseUnit = relativeUnit._baseUnit;
             _baseUnitRatio = relativeRatio * relativeUnit._baseUnitRatio;
         }
 
@@ -50,6 +53,11 @@ namespace OoBootCamp.Quantities
         internal int HashCode(double amount)
         {
             return Math.Round(amount * _baseUnitRatio, DecimalPlaceCount).GetHashCode();
+        }
+
+        public bool IsCompatible(Unit otherUnit)
+        {
+            return this._baseUnit == otherUnit._baseUnit;
         }
     }
 

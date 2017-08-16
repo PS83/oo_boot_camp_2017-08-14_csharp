@@ -23,7 +23,13 @@ namespace OoBootCamp.Quantities
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
+            if (!this.IsCompatible(other)) return false;
             return Math.Abs(this._amount - ConvertedAmount(other)) < Tolerance;
+        }
+
+        private bool IsCompatible(Quantity other)
+        {
+            return this._unit.IsCompatible(other._unit);
         }
 
         private double ConvertedAmount(Quantity other)
