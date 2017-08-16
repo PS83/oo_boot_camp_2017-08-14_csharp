@@ -44,5 +44,14 @@ namespace OoBootCamp.Tests.Quantities
         {
             Assert.AreEqual(Tablespoon.S(8).GetHashCode(), Cup.S(0.5).GetHashCode());
         }
+
+        [Test]
+        public void Arithmetic()
+        {
+            Assert.AreEqual(Tablespoon.S(-3), -Tablespoon.S(3));
+            Assert.AreEqual(-Cup.S(1.5), Cup.S(6.5) - Cup.S(8));
+            Assert.AreEqual(-Tablespoon.S(24), Cup.S(6.5) - Gallon.S(0.5));
+            Assert.AreEqual(-24.Tablespoons(), 6.5.Cups() - 0.5.Gallons());
+        }
     }
 }

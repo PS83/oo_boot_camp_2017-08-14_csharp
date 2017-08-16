@@ -42,5 +42,14 @@ namespace OoBootCamp.Quantities
         {
             return _unit.HashCode(_amount);
         }
+
+        public static Quantity operator +(Quantity left, Quantity right)
+        {
+            return new Quantity(left._amount + left.ConvertedAmount(right), left._unit);
+        }
+
+        public static Quantity operator -(Quantity q) => new Quantity(-q._amount, q._unit);
+
+        public static Quantity operator -(Quantity left, Quantity right) => left + -right;
     }
 }
