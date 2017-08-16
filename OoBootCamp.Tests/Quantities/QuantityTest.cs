@@ -31,6 +31,7 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(Cup.S(0.5), Tablespoon.S(8));
             Assert.AreEqual(Gallon.S(2), Teaspoon.S(1536));
             Assert.AreNotEqual(Cup.S(6), Tablespoon.S(6));
+            Assert.AreEqual(Inch.S(126720), Mile.S(2));
 
             Assert.AreEqual(6.Tablespoons(), 3.Ounces());
             Assert.AreEqual(8.Tablespoons(), 0.5.Cups());
@@ -43,6 +44,7 @@ namespace OoBootCamp.Tests.Quantities
         public void Hash()
         {
             Assert.AreEqual(Tablespoon.S(8).GetHashCode(), Cup.S(0.5).GetHashCode());
+            Assert.AreEqual(Yard.S(2).GetHashCode(), Inch.Es(72).GetHashCode());
         }
 
         [Test]
@@ -52,6 +54,7 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(-Cup.S(1.5), Cup.S(6.5) - Cup.S(8));
             Assert.AreEqual(-Tablespoon.S(24), Cup.S(6.5) - Gallon.S(0.5));
             Assert.AreEqual(-24.Tablespoons(), 6.5.Cups() - 0.5.Gallons());
+            Assert.AreEqual(-Foot.S(6), Inch.Es(18) - Yard.S(2.5));
         }
     }
 }

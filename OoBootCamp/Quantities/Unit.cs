@@ -19,6 +19,12 @@ namespace OoBootCamp.Quantities
         public static readonly Unit Quart = new Unit(2, Pint);
         public static readonly Unit Gallon = new Unit(4, Quart);
 
+        public static readonly Unit Inch = new Unit();
+        public static readonly Unit Foot = new Unit(12, Inch);
+        public static readonly Unit Yard = new Unit(3, Foot);
+        public static readonly Unit Furlong = new Unit(220, Yard);
+        public static readonly Unit Mile = new Unit(8, Furlong);
+
         private static readonly int DecimalPlaceCount = 6;
         private readonly double _baseUnitRatio;
 
@@ -32,10 +38,9 @@ namespace OoBootCamp.Quantities
             _baseUnitRatio = relativeRatio * relativeUnit._baseUnitRatio;
         }
 
-        public Quantity S(double amount)
-        {
-            return new Quantity(amount, this);
-        }
+        public Quantity S(double amount) => new Quantity(amount, this);
+
+        public Quantity Es(double amount) => this.S(amount);
 
         internal double ConvertedAmount(double otherAmount, Unit other)
         {
@@ -66,6 +71,17 @@ namespace OoBootCamp.Quantities
             public static Quantity Quarts(this int amount) => Quart.S(amount);
             public static Quantity Gallons(this double amount) => Gallon.S(amount);
             public static Quantity Gallons(this int amount) => Gallon.S(amount);
+
+            public static Quantity Inches(this double amount) => Inch.S(amount);
+            public static Quantity Inches(this int amount) => Inch.S(amount);
+            public static Quantity Feet(this double amount) => Foot.S(amount);
+            public static Quantity Feet(this int amount) => Foot.S(amount);
+            public static Quantity Yards(this double amount) => Yard.S(amount);
+            public static Quantity Yards(this int amount) => Yard.S(amount);
+            public static Quantity Furlongs(this double amount) => Furlong.S(amount);
+            public static Quantity Furlongs(this int amount) => Furlong.S(amount);
+            public static Quantity Miles(this double amount) => Mile.S(amount);
+            public static Quantity Miles(this int amount) => Mile.S(amount);
         }
     }
 }
