@@ -47,6 +47,7 @@ namespace OoBootCamp.Quantities
 
         internal double ConvertedAmount(double otherAmount, Unit other)
         {
+            if (!this.IsCompatible(other)) throw new InvalidOperationException("Mixed Unit arithmetic");
             return otherAmount * other._baseUnitRatio / this._baseUnitRatio;
         }
 
@@ -55,10 +56,7 @@ namespace OoBootCamp.Quantities
             return Math.Round(amount * _baseUnitRatio, DecimalPlaceCount).GetHashCode();
         }
 
-        public bool IsCompatible(Unit otherUnit)
-        {
-            return this._baseUnit == otherUnit._baseUnit;
-        }
+        public bool IsCompatible(Unit otherUnit) => this._baseUnit == otherUnit._baseUnit;
     }
 
     namespace ExtensionMethods

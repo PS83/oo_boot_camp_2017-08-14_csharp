@@ -60,5 +60,11 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(-24.Tablespoons(), 6.5.Cups() - 0.5.Gallons());
             Assert.AreEqual(-Foot.S(6), Inch.Es(18) - Yard.S(2.5));
         }
+
+        [Test]
+        public void InvalidArithmetic()
+        {
+            Assert.That(() => Inch.Es(3) + Teaspoon.S(4), Throws.InvalidOperationException);
+        }
     }
 }
