@@ -63,6 +63,7 @@ namespace OoBootCamp.Tests.Quantities
         {
             Assert.AreEqual(Tablespoon.S(8).GetHashCode(), Cup.S(0.5).GetHashCode());
             Assert.AreEqual(Yard.S(2).GetHashCode(), Inch.Es(72).GetHashCode());
+            Assert.AreEqual(Fahrenheit.S(50).GetHashCode(), Celsius.Es(10).GetHashCode());
         }
 
         [Test]
