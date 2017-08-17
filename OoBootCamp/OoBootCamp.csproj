@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chance.cs" />
-    <Compile Include="Quantities\Quantity.cs" />
+    <Compile Include="Quantities\IntervalQuantity.cs" />
+    <Compile Include="Quantities\RatioQuantity.cs" />
     <Compile Include="Quantities\Unit.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

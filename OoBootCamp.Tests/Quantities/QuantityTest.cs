@@ -80,6 +80,7 @@ namespace OoBootCamp.Tests.Quantities
         public void InvalidArithmetic()
         {
             Assert.That(() => Inch.Es(3) + Teaspoon.S(4), Throws.InvalidOperationException);
+            //var result = Celsius.Es(0) + Celsius.Es(0); // Should not even compile
         }
     }
 }
