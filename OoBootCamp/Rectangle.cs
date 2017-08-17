@@ -29,5 +29,10 @@ namespace OoBootCamp
         {
             return 2 * (_height + _width);
         }
+
+        public static Rectangle Square(double side)
+        {
+            return new Rectangle(side, side);
+        }
     }
 }

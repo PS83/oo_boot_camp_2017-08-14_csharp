@@ -12,7 +12,7 @@ namespace OoBootCamp.Tests.Quantities
     // Ensures Quantity operates correctly
     [TestFixture]
     public class QuantityTest
-    {
+    { 
 
         [Test]
         public void EqualityOfLikeUnits()
