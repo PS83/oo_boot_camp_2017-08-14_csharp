@@ -6,9 +6,9 @@
 using System;
 
 namespace OoBootCamp
-{
+{ 
     // Understands a 4-sided polygon with sides at right angles
-    public class Rectangle
+    public class Rectangle : Sequenceable<Rectangle>
     {
         private readonly double _width;
         private readonly double _height;
@@ -33,6 +33,11 @@ namespace OoBootCamp
         public static Rectangle Square(double side)
         {
             return new Rectangle(side, side);
+        }
+
+        public bool IsBetterThan(Rectangle other)
+        {
+            return this.Area() > other.Area();
         }
     }
 }
