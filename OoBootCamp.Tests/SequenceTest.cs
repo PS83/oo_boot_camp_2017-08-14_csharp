@@ -3,6 +3,7 @@
  * May be used freely except for training; license required for training.
  */
 
+using System.Collections.Generic;
 using NUnit.Framework;
 using OoBootCamp.Quantities;
 using static OoBootCamp.Quantities.Unit;
@@ -17,7 +18,7 @@ namespace OoBootCamp.Tests
         [Test]
         public void RectangleArea()
         {
-            Rectangle[] rectangles = {
+            var rectangles = new List<Rectangle>() {
                 new Rectangle(2, 3),
                 new Rectangle(3, 4),
                 new Rectangle(3, 3)

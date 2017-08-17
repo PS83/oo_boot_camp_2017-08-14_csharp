@@ -2,13 +2,15 @@
  * Copyright (c) 2017 by Fred George
  * May be used freely except for training; license required for training.
  */
- 
+
+
+using System.Collections.Generic;
 
 namespace OoBootCamp
 {
     public class Sequence
     {
-        public static T Best<T>(T[] elements) where T : Sequenceable<T>
+        public static T Best<T>(List<T> elements) where T : Sequenceable<T>
         {
             T champion = elements[0];
             foreach (var challenger in elements)
