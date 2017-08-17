@@ -22,21 +22,16 @@ namespace OoBootCamp.Quantities
 
         public bool Equals(IntervalQuantity other)
         {
-            if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other)) return false;
             if (!this.IsCompatible(other)) return false;
             return Math.Abs(this.Amount - ConvertedAmount(other)) < Tolerance;
         }
 
-        private bool IsCompatible(IntervalQuantity other)
-        {
-            return this.Unit.IsCompatible(other.Unit);
-        }
+        private bool IsCompatible(IntervalQuantity other) => this.Unit.IsCompatible(other.Unit);
 
-        protected internal double ConvertedAmount(IntervalQuantity other)
-        {
-            return this.Unit.ConvertedAmount(other.Amount, other.Unit);
-        }
+        protected internal double ConvertedAmount(IntervalQuantity other) 
+            => this.Unit.ConvertedAmount(other.Amount, other.Unit);
 
         public override bool Equals(object other)
         {
@@ -45,9 +40,6 @@ namespace OoBootCamp.Quantities
             return other.GetType() == this.GetType() && Equals((IntervalQuantity)other);
         }
 
-        public override int GetHashCode()
-        {
-            return Unit.HashCode(Amount);
-        }
+        public override int GetHashCode() => Unit.HashCode(Amount);
     }
 }

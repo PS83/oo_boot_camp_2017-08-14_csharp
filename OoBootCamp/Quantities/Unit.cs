@@ -53,10 +53,8 @@ namespace OoBootCamp.Quantities
             return (otherAmount - other._offset) * other._baseUnitRatio / this._baseUnitRatio + this._offset;
         }
 
-        internal int HashCode(double amount)
-        {
-            return Math.Round((amount - _offset) * _baseUnitRatio, DecimalPlaceCount).GetHashCode();
-        }
+        internal int HashCode(double amount) 
+            => Math.Round((amount - _offset) * _baseUnitRatio, DecimalPlaceCount).GetHashCode();
 
         internal bool IsCompatible(Unit otherUnit) => this._baseUnit == otherUnit._baseUnit;
 
