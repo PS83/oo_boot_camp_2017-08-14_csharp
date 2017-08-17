@@ -55,6 +55,8 @@ namespace OoBootCamp.Tests.Quantities
             Assert.AreEqual(Fahrenheit.S(50), Celsius.Es(10));
             Assert.AreEqual(Celsius.Es(100), Fahrenheit.S(212));
             Assert.AreEqual(Fahrenheit.S(212), Celsius.Es(100));
+
+            Assert.AreEqual(50.Fahrenheit(), 10.Celsius());
         }
 
 

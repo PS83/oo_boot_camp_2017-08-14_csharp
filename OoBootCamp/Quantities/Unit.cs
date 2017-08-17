@@ -63,7 +63,8 @@ namespace OoBootCamp.Quantities
         public class RatioUnit : Unit
         {
             internal RatioUnit() { }
-            internal RatioUnit(double relativeRatio, Unit relativeUnit) : base(relativeRatio, 0, relativeUnit) { }
+            internal RatioUnit(double relativeRatio, Unit relativeUnit) : 
+                base(relativeRatio, 0, relativeUnit) { }
 
             public RatioQuantity S(double amount) => new RatioQuantity(amount, this);
 
@@ -111,6 +112,11 @@ namespace OoBootCamp.Quantities
             public static RatioQuantity Furlongs(this int amount) => Furlong.S(amount);
             public static RatioQuantity Miles(this double amount) => Mile.S(amount);
             public static RatioQuantity Miles(this int amount) => Mile.S(amount);
+
+            public static IntervalQuantity Celsius(this double amount) => Unit.Celsius.Es(amount);
+            public static IntervalQuantity Celsius(this int amount) => Unit.Celsius.Es(amount);
+            public static IntervalQuantity Fahrenheit(this double amount) => Unit.Fahrenheit.S(amount);
+            public static IntervalQuantity Fahrenheit(this int amount) => Unit.Fahrenheit.S(amount);
         }
     }
 }

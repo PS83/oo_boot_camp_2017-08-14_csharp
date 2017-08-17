@@ -7,16 +7,17 @@ using System;
 
 namespace OoBootCamp.Quantities
 {
+    // Understands a specific scale-based measurement
     public class IntervalQuantity : IEquatable<IntervalQuantity>
     {
         private static readonly double Tolerance = 1e-6;
-        private readonly double _amount;
-        private readonly Unit _unit;
+        protected internal readonly double Amount;
+        protected internal readonly Unit Unit;
 
         internal IntervalQuantity(double amount, Unit unit)
         {
-            _amount = amount;
-            _unit = unit;
+            Amount = amount;
+            Unit = unit;
         }
 
         public bool Equals(IntervalQuantity other)
@@ -24,17 +25,17 @@ namespace OoBootCamp.Quantities
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             if (!this.IsCompatible(other)) return false;
-            return Math.Abs(this._amount - ConvertedAmount(other)) < Tolerance;
+            return Math.Abs(this.Amount - ConvertedAmount(other)) < Tolerance;
         }
 
         private bool IsCompatible(IntervalQuantity other)
         {
-            return this._unit.IsCompatible(other._unit);
+            return this.Unit.IsCompatible(other.Unit);
         }
 
-        private double ConvertedAmount(IntervalQuantity other)
+        protected internal double ConvertedAmount(IntervalQuantity other)
         {
-            return this._unit.ConvertedAmount(other._amount, other._unit);
+            return this.Unit.ConvertedAmount(other.Amount, other.Unit);
         }
 
         public override bool Equals(object other)
@@ -46,7 +47,7 @@ namespace OoBootCamp.Quantities
 
         public override int GetHashCode()
         {
-            return _unit.HashCode(_amount);
+            return Unit.HashCode(Amount);
         }
     }
 }
