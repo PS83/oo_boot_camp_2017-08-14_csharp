@@ -5,8 +5,6 @@
 
 using System.Collections.Generic;
 using NUnit.Framework;
-using OoBootCamp.Quantities;
-using static OoBootCamp.Quantities.Unit;
 
 namespace OoBootCamp.Tests
 {
@@ -24,6 +22,7 @@ namespace OoBootCamp.Tests
                 new Rectangle(3, 3)
             };
             Assert.AreEqual(12.0, rectangles.Best().Area());
+            Assert.AreEqual(12.0, rectangles.ToArray().Best().Area());
         }
 
     }
