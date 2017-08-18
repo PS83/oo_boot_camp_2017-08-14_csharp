@@ -3,6 +3,7 @@
  * May be used freely except for training; license required for training.
  */
 
+using System;
 using NUnit.Framework;
 using OoBootCamp.Graph;
 
@@ -20,7 +21,8 @@ namespace OoBootCamp.Tests.Graph
         private static readonly Node F = new Node();
         private static readonly Node G = new Node();
 
-        static GraphTest()
+        [OneTimeSetUp]
+        public void OneTimeSetup() 
         {
             B.To(A);
             B.To(C).To(D).To(E).To(B).To(F);
@@ -38,6 +40,18 @@ namespace OoBootCamp.Tests.Graph
             Assert.IsTrue(C.CanReach(F));
             Assert.IsFalse(G.CanReach(B));
             Assert.IsFalse(B.CanReach(G));
+        }
+
+        [Test]
+        public void HopCount()
+        {
+            Assert.AreEqual(0, A.HopCount(A));
+            Assert.AreEqual(1, B.HopCount(A));
+            Assert.AreEqual(1, B.HopCount(F));
+            Assert.AreEqual(4, C.HopCount(F));
+            Assert.Throws<InvalidOperationException>(delegate { A.HopCount(B); });
+            Assert.Throws<InvalidOperationException>(delegate { G.HopCount(B); });
+            Assert.Throws<InvalidOperationException>(delegate { B.HopCount(G); });
         }
     }
 }

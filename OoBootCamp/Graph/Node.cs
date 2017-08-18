@@ -13,6 +13,7 @@ namespace OoBootCamp.Graph
     public class Node
     {
         private readonly IList<Node> _neighbors = new List<Node>();
+        private const int Unreachable = -1;
 
         public Node To(Node neighbour)
         {
@@ -36,6 +37,26 @@ namespace OoBootCamp.Graph
         private IList<Node> NoVisitedNodes()
         {
             return new List<Node>();
+        }
+
+        public int HopCount(Node destination)
+        {
+            var result = HopCount(destination, NoVisitedNodes());
+            if (result == Unreachable) throw new InvalidOperationException("Unreachable destination");
+            return result;
+        }
+
+        private int HopCount(Node destination, IList<Node> visitedNodes)
+        {
+            if (this == destination) return 0;
+            if (visitedNodes.Contains(this)) return Unreachable;
+            visitedNodes.Add(this);
+            foreach (var n in _neighbors)
+            {
+                var result = n.HopCount(destination, visitedNodes);
+                if (result != Unreachable) return result + 1;
+            }
+            return Unreachable;
         }
     }
 }
