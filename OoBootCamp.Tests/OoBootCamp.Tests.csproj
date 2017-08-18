@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChanceTest.cs" />
+    <Compile Include="Graph\GraphTest.cs" />
     <Compile Include="Quantities\QuantityTest.cs" />
     <Compile Include="RectangleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

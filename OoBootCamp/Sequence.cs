@@ -21,7 +21,7 @@ namespace OoBootCamp
 
     // Understands rules to be ordered elements
     // ReSharper disable once InconsistentNaming
-    public interface Sequenceable<T>
+    public interface Sequenceable<in T>
     {
         bool IsBetterThan(T other);
     }
