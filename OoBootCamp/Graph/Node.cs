@@ -50,13 +50,22 @@ namespace OoBootCamp.Graph
         {
             if (this == destination) return 0;
             if (visitedNodes.Contains(this)) return Unreachable;
-            visitedNodes.Add(this);
-            foreach (var n in _neighbors)
-            {
-                var result = n.HopCount(destination, visitedNodes);
-                if (result != Unreachable) return result + 1;
-            }
-            return Unreachable;
+            return NeighborHopCount(destination, visitedNodes);
         }
+
+        private int NeighborHopCount(Node destination, IList<Node> visitedNodes)
+        {
+            visitedNodes.Add(this);
+            var champion = Unreachable;
+            foreach (var neighbor in _neighbors)
+            {
+                var challenger = neighbor.HopCount(destination, visitedNodes);
+                if (challenger == Unreachable) continue;
+                challenger += 1;
+                if (champion == Unreachable || challenger < champion) champion = challenger;
+            }
+            return champion;
+        }
+
     }
 }

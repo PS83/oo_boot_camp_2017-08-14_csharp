@@ -48,7 +48,7 @@ namespace OoBootCamp.Tests.Graph
             Assert.AreEqual(0, A.HopCount(A));
             Assert.AreEqual(1, B.HopCount(A));
             Assert.AreEqual(1, B.HopCount(F));
-            Assert.AreEqual(4, C.HopCount(F));
+            Assert.AreEqual(3, C.HopCount(F));
             Assert.Throws<InvalidOperationException>(delegate { A.HopCount(B); });
             Assert.Throws<InvalidOperationException>(delegate { G.HopCount(B); });
             Assert.Throws<InvalidOperationException>(delegate { B.HopCount(G); });
