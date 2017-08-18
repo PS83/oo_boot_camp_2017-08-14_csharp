@@ -8,7 +8,7 @@ using System;
 namespace OoBootCamp.Quantities
 {
     // Understands a specific scale-based measurement
-    public class IntervalQuantity : IEquatable<IntervalQuantity>
+    public class IntervalQuantity : IEquatable<IntervalQuantity>, Sequenceable<IntervalQuantity>
     {
         private static readonly double Tolerance = 1e-6;
         protected internal readonly double Amount;
@@ -32,6 +32,11 @@ namespace OoBootCamp.Quantities
 
         protected internal double ConvertedAmount(IntervalQuantity other) 
             => this.Unit.ConvertedAmount(other.Amount, other.Unit);
+
+        public bool IsBetterThan(IntervalQuantity other)
+        {
+            return this.Amount > ConvertedAmount(other);
+        }
 
         public override bool Equals(object other)
         {

@@ -5,6 +5,8 @@
 
 using System.Collections.Generic;
 using NUnit.Framework;
+using OoBootCamp.Quantities;
+using static OoBootCamp.Quantities.Unit;
 
 namespace OoBootCamp.Tests
 {
@@ -16,7 +18,8 @@ namespace OoBootCamp.Tests
         [Test]
         public void RectangleArea()
         {
-            var rectangles = new List<Rectangle>() {
+            var rectangles = new List<Rectangle>
+            {
                 new Rectangle(2, 3),
                 new Rectangle(3, 4),
                 new Rectangle(3, 3)
@@ -33,6 +36,16 @@ namespace OoBootCamp.Tests
                 new Chance(0.50), new Chance(0.25), new Chance(0.75), new Chance(0.1)
             };
             Assert.AreEqual(new Chance(0.75), Sequence.Best(chances));
+        }
+
+        [Test]
+        public void Quantity()
+        {
+            var quantities = new List<IntervalQuantity>
+            {
+                Teaspoon.S(10), Quart.S(1), Tablespoon.S(6), Ounce.S(13)
+            };
+            Assert.AreEqual(Pint.S(2), Sequence.Best(quantities));
         }
 
     }
