@@ -5,18 +5,18 @@
 
 
 using System.Collections.Generic;
+using System.Linq;
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace OoBootCamp
 {
-    public class Sequence
+    public static class Sequence
     {
-        public static T Best<T>(List<T> elements) where T : Sequenceable<T>
+        public static T Best<T>(this IEnumerable<T> elements) where T : Sequenceable<T>
         {
-            T champion = elements[0];
+            T champion = elements.First();
             foreach (var challenger in elements)
-            {
                 champion = challenger.IsBetterThan(champion) ? challenger : champion;
-            }
             return champion;
         }
     }

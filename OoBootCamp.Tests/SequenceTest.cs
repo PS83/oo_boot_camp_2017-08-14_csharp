@@ -23,7 +23,7 @@ namespace OoBootCamp.Tests
                 new Rectangle(3, 4),
                 new Rectangle(3, 3)
             };
-            Assert.AreEqual(12.0, Sequence.Best(rectangles).Area());
+            Assert.AreEqual(12.0, rectangles.Best().Area());
         }
 
     }
