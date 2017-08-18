@@ -13,7 +13,7 @@ namespace OoBootCamp.Graph
     // Understands its neighbours
     public class Node
     {
-        private readonly IList<Node> _neighbors = new List<Node>();
+        private readonly List<Node> _neighbors = new List<Node>();
         private const double Unreachable = Double.PositiveInfinity;
 
         public Node To(Node neighbour)
@@ -24,15 +24,7 @@ namespace OoBootCamp.Graph
 
         public bool CanReach(Node destination)
         {
-            return CanReach(destination, NoVisitedNodes());
-        }
-
-        private bool CanReach(Node destination, IList<Node> visitedNodes)
-        {
-            if (this == destination) return true;
-            if (visitedNodes.Contains(this)) return false;
-            visitedNodes.Add(this);
-            return _neighbors.Any(n => n.CanReach(destination, visitedNodes));
+            return HopCount(destination, NoVisitedNodes()) != Unreachable;
         }
 
         private IList<Node> NoVisitedNodes()
@@ -51,19 +43,15 @@ namespace OoBootCamp.Graph
         {
             if (this == destination) return 0;
             if (visitedNodes.Contains(this)) return Unreachable;
-            return NeighborHopCount(destination, new List<Node>(visitedNodes));
+            if (_neighbors.Count == 0) return Unreachable;
+            return _neighbors
+                       .ConvertAll(n => n.HopCount(destination, CopyWithThis(visitedNodes)))
+                       .Min() + 1;
         }
 
-        private double NeighborHopCount(Node destination, IList<Node> visitedNodes)
+        private List<Node> CopyWithThis(IList<Node> originalNodes)
         {
-            visitedNodes.Add(this);
-            var champion = Unreachable;
-            foreach (var neighbor in _neighbors)
-            {
-                var challenger = neighbor.HopCount(destination, visitedNodes) + 1;
-                if (challenger < champion) champion = challenger;
-            }
-            return champion;
+            return new List<Node>(originalNodes) {this};
         }
 
     }
