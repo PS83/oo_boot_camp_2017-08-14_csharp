@@ -14,10 +14,8 @@ namespace OoBootCamp
     {
         public static T Best<T>(this IEnumerable<T> elements) where T : Sequenceable<T>
         {
-            T champion = elements.First();
-            foreach (var challenger in elements)
-                champion = challenger.IsBetterThan(champion) ? challenger : champion;
-            return champion;
+            return elements.Aggregate(elements.First(),
+                (champion, challenger) => challenger.IsBetterThan(champion) ? challenger : champion);
         }
     }
 
