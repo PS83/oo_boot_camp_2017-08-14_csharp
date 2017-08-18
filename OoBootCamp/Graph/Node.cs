@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace OoBootCamp.Graph
 {
@@ -13,7 +14,7 @@ namespace OoBootCamp.Graph
     public class Node
     {
         private readonly IList<Node> _neighbors = new List<Node>();
-        private const int Unreachable = -1;
+        private const double Unreachable = Double.PositiveInfinity;
 
         public Node To(Node neighbour)
         {
@@ -43,26 +44,24 @@ namespace OoBootCamp.Graph
         {
             var result = HopCount(destination, NoVisitedNodes());
             if (result == Unreachable) throw new InvalidOperationException("Unreachable destination");
-            return result;
+            return (int)result;
         }
 
-        private int HopCount(Node destination, IList<Node> visitedNodes)
+        private double HopCount(Node destination, IList<Node> visitedNodes)
         {
             if (this == destination) return 0;
             if (visitedNodes.Contains(this)) return Unreachable;
             return NeighborHopCount(destination, new List<Node>(visitedNodes));
         }
 
-        private int NeighborHopCount(Node destination, IList<Node> visitedNodes)
+        private double NeighborHopCount(Node destination, IList<Node> visitedNodes)
         {
             visitedNodes.Add(this);
             var champion = Unreachable;
             foreach (var neighbor in _neighbors)
             {
-                var challenger = neighbor.HopCount(destination, visitedNodes);
-                if (challenger == Unreachable) continue;
-                challenger += 1;
-                if (champion == Unreachable || challenger < champion) champion = challenger;
+                var challenger = neighbor.HopCount(destination, visitedNodes) + 1;
+                if (challenger < champion) champion = challenger;
             }
             return champion;
         }
