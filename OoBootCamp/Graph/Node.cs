@@ -50,7 +50,7 @@ namespace OoBootCamp.Graph
         {
             if (this == destination) return 0;
             if (visitedNodes.Contains(this)) return Unreachable;
-            return NeighborHopCount(destination, visitedNodes);
+            return NeighborHopCount(destination, new List<Node>(visitedNodes));
         }
 
         private int NeighborHopCount(Node destination, IList<Node> visitedNodes)
