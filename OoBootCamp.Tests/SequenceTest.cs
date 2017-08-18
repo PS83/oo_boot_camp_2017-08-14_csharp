@@ -25,5 +25,15 @@ namespace OoBootCamp.Tests
             Assert.AreEqual(12.0, rectangles.ToArray().Best().Area());
         }
 
+        [Test]
+        public void Chance()
+        {
+            Chance[] chances =
+            {
+                new Chance(0.50), new Chance(0.25), new Chance(0.75), new Chance(0.1)
+            };
+            Assert.AreEqual(new Chance(0.75), Sequence.Best(chances));
+        }
+
     }
 }

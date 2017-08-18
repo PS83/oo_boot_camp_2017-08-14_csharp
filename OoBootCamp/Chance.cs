@@ -9,7 +9,7 @@ using OoBootCamp;
 namespace OoBootCamp
 {
     // Understands the likelihood of something occurring
-    public class Chance : IEquatable<Chance>
+    public class Chance : IEquatable<Chance>, Sequenceable<Chance>
     {
         private const double CertainFraction = 1.0;
         private const double Tolerance = 1e-6;
@@ -27,6 +27,11 @@ namespace OoBootCamp
             if (ReferenceEquals(this, other)) return true;
             if (ReferenceEquals(null, other)) return false;
             return Math.Abs(this._fraction - other._fraction) < Tolerance;
+        }
+
+        public bool IsBetterThan(Chance other)
+        {
+            return this._fraction > other._fraction;
         }
 
         public override bool Equals(object other)
