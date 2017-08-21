@@ -11,10 +11,12 @@ namespace OoBootCamp.Graph
     public class Link
     {
         private readonly Node _target;
+        private readonly double _cost;
 
-        public Link(Node target)
+        public Link(Node target, double cost)
         {
             _target = target;
+            _cost = cost;
         }
 
         public double HopCount(Node destination, List<Node> visitedNodes)

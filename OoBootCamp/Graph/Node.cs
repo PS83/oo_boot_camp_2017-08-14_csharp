@@ -16,10 +16,9 @@ namespace OoBootCamp.Graph
         private readonly List<Link> _links = new List<Link>();
         private const double Unreachable = Double.PositiveInfinity;
 
-        public Node To(Node neighbour)
+        public LinkBuilder Cost(double amount)
         {
-            _links.Add(new Link(neighbour));
-            return neighbour;
+            return new LinkBuilder(amount, _links);
         }
 
         public bool CanReach(Node destination)
@@ -52,6 +51,24 @@ namespace OoBootCamp.Graph
         private List<Node> CopyWithThis(IList<Node> originalNodes)
         {
             return new List<Node>(originalNodes) {this};
+        }
+
+        public class LinkBuilder
+        {
+            private readonly double _cost;
+            private readonly List<Link> _links;
+
+            internal LinkBuilder(double cost, List<Link> links)
+            {
+                _cost = cost;
+                _links = links;
+            }
+
+            public Node To(Node target)
+            {
+                _links.Add(new Link(target, _cost));
+                return target;
+            }
         }
 
     }

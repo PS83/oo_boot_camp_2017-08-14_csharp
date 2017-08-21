@@ -22,12 +22,12 @@ namespace OoBootCamp.Tests.Graph
         private static readonly Node G = new Node();
 
         [OneTimeSetUp]
-        public void OneTimeSetup() 
+        public void OneTimeSetup()
         {
-            B.To(A);
-            B.To(C).To(D).To(E).To(B).To(F);
-            C.To(D);
-            C.To(E);
+            B.Cost(6).To(A);
+            B.Cost(7).To(C).Cost(5).To(D).Cost(2).To(E).Cost(3).To(B).Cost(4).To(F);
+            C.Cost(1).To(D);
+            C.Cost(8).To(E);
         }
 
         [Test]
