@@ -53,5 +53,17 @@ namespace OoBootCamp.Tests.Graph
             Assert.Throws<InvalidOperationException>(delegate { G.HopCount(B); });
             Assert.Throws<InvalidOperationException>(delegate { B.HopCount(G); });
         }
+
+        [Test]
+        public void Cost()
+        {
+            Assert.AreEqual(0, A.Cost(A));
+            Assert.AreEqual(6, B.Cost(A));
+            Assert.AreEqual(4, B.Cost(F));
+            Assert.AreEqual(10, C.Cost(F));
+            Assert.Throws<InvalidOperationException>(delegate { A.Cost(B); });
+            Assert.Throws<InvalidOperationException>(delegate { G.Cost(B); });
+            Assert.Throws<InvalidOperationException>(delegate { B.Cost(G); });
+        }
     }
 }

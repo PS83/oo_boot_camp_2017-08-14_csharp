@@ -23,5 +23,10 @@ namespace OoBootCamp.Graph
         {
             return _target.HopCount(destination, visitedNodes) + 1;
         }
+
+        public double Cost(Node destination, List<Node> visitedNodes)
+        {
+            return _target.Cost(destination, visitedNodes) + _cost;
+        }
     }
 }
