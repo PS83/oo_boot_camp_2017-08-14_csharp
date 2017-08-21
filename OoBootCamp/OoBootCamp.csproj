@@ -43,6 +43,7 @@
     <Compile Include="Chance.cs" />
     <Compile Include="Graph\Link.cs" />
     <Compile Include="Graph\Node.cs" />
+    <Compile Include="Graph\Path.cs" />
     <Compile Include="Quantities\IntervalQuantity.cs" />
     <Compile Include="Quantities\RatioQuantity.cs" />
     <Compile Include="Quantities\Unit.cs" />
