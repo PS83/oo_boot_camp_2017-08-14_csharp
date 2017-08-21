@@ -8,25 +8,25 @@ using System.Collections.Generic;
 namespace OoBootCamp.Graph
 {
     // Understands a connection from one specific Node to another
-    public class Link
+    internal class Link
     {
         private readonly Node _target;
         private readonly double _cost;
 
-        public Link(Node target, double cost)
+        internal delegate double CostStrategy(double cost);
+
+        internal static readonly CostStrategy LeastCost = c => c;
+        internal static readonly CostStrategy FewestHops = c => 1;
+
+        internal Link(Node target, double cost)
         {
             _target = target;
             _cost = cost;
         }
 
-        public double HopCount(Node destination, List<Node> visitedNodes)
+        internal double Cost(Node destination, List<Node> visitedNodes, CostStrategy strategy)
         {
-            return _target.HopCount(destination, visitedNodes) + 1;
-        }
-
-        public double Cost(Node destination, List<Node> visitedNodes)
-        {
-            return _target.Cost(destination, visitedNodes) + _cost;
+            return _target.Cost(destination, visitedNodes, strategy) + strategy(_cost);
         }
     }
 }

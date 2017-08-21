@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static OoBootCamp.Graph.Link;
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace OoBootCamp.Graph
@@ -23,7 +24,7 @@ namespace OoBootCamp.Graph
 
         public bool CanReach(Node destination)
         {
-            return HopCount(destination, NoVisitedNodes()) != Unreachable;
+            return Cost(destination, NoVisitedNodes(), LeastCost) != Unreachable;
         }
 
         private IList<Node> NoVisitedNodes()
@@ -33,35 +34,28 @@ namespace OoBootCamp.Graph
 
         public int HopCount(Node destination)
         {
-            var result = HopCount(destination, NoVisitedNodes());
-            if (result == Unreachable) throw new InvalidOperationException("Unreachable destination");
-            return (int)result;
+            return (int)Cost(destination, FewestHops);
         }
 
-        internal double HopCount(Node destination, IList<Node> visitedNodes)
+        public double Cost(Node destination)
+        {
+            return Cost(destination, LeastCost);
+        }
+
+        private double Cost(Node destination, CostStrategy strategy)
+        {
+            var result = Cost(destination, NoVisitedNodes(), strategy);
+            if (result == Unreachable) throw new InvalidOperationException("Unreachable destination");
+            return result;
+        }
+
+        internal double Cost(Node destination, IList<Node> visitedNodes, CostStrategy strategy)
         {
             if (this == destination) return 0;
             if (visitedNodes.Contains(this)) return Unreachable;
             if (_links.Count == 0) return Unreachable;
             return _links
-                .ConvertAll(link => link.HopCount(destination, CopyWithThis(visitedNodes)))
-                .Min();
-        }
-
-        public int Cost(Node destination)
-        {
-            var result = Cost(destination, NoVisitedNodes());
-            if (result == Unreachable) throw new InvalidOperationException("Unreachable destination");
-            return (int)result;
-        }
-
-        internal double Cost(Node destination, IList<Node> visitedNodes)
-        {
-            if (this == destination) return 0;
-            if (visitedNodes.Contains(this)) return Unreachable;
-            if (_links.Count == 0) return Unreachable;
-            return _links
-                .ConvertAll(link => link.Cost(destination, CopyWithThis(visitedNodes)))
+                .ConvertAll(link => link.Cost(destination, CopyWithThis(visitedNodes), strategy))
                 .Min();
         }
 
