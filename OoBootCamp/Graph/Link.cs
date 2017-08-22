@@ -30,9 +30,9 @@ namespace OoBootCamp.Graph
             return _target.Cost(destination, visitedNodes, strategy) + strategy(_cost);
         }
 
-        internal Path Path(Node destination, List<Node> visitedNodes)
+        internal Path Path(Node destination, List<Node> visitedNodes, IComparer<Path> strategy)
         {
-            return _target.Path(destination, visitedNodes).Prepend(this);
+            return _target.Path(destination, visitedNodes, strategy).Prepend(this);
         }
 
         public static double TotalCost(List<Link> links)

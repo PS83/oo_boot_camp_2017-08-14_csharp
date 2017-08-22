@@ -11,7 +11,8 @@ namespace OoBootCamp.Graph
     // Understands a specific route from one Node to another Node
     public abstract class Path : IComparable<Path>
     {
-        internal static readonly Path None = new NoPath();
+        public static IComparer<Path> LeastCost =
+            Comparer<Path>.Create((left, right) => left.Cost().CompareTo(right.Cost()));
 
         public abstract int HopCount();
 

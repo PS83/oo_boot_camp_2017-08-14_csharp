@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static OoBootCamp.Graph.Link;
+//using static OoBootCamp.Graph.Path;
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace OoBootCamp.Graph
@@ -63,19 +64,25 @@ namespace OoBootCamp.Graph
 
         public Path Path(Node destination)
         {
-            var result = Path(destination, NoVisitedNodes());
+            return Path(destination, Graph.Path.LeastCost);
+        }
+
+        private Path Path(Node destination, IComparer<Path> strategy)
+        {
+            var result = Path(destination, NoVisitedNodes(), strategy);
             if (result == NoPath) throw new InvalidOperationException("Unreachable destination");
             return result;
         }
 
-        internal Path Path(Node destination, IList<Node> visitedNodes)
+        internal Path Path(Node destination, IList<Node> visitedNodes, IComparer<Path> strategy)
         {
             if (this == destination) return new Path.ActualPath();
             if (visitedNodes.Contains(this)) return NoPath;
             if (_links.Count == 0) return NoPath;
-            return _links
-                .ConvertAll(link => link.Path(destination, CopyWithThis(visitedNodes)))
-                .Min();
+            var neighborPaths = _links
+                .ConvertAll(link => link.Path(destination, CopyWithThis(visitedNodes), strategy));
+            neighborPaths.Sort(strategy);
+            return neighborPaths.First();
         }
 
         private List<Node> CopyWithThis(IList<Node> originalNodes)
