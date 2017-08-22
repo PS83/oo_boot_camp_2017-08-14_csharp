@@ -16,6 +16,7 @@ namespace OoBootCamp.Graph
     {
         private readonly List<Link> _links = new List<Link>();
         private const double Unreachable = Double.PositiveInfinity;
+        private static readonly Path NoPath = new Path.NoPath();
 
         public Node To(Node neighbour, double cost)
         {
@@ -63,15 +64,15 @@ namespace OoBootCamp.Graph
         public Path Path(Node destination)
         {
             var result = Path(destination, NoVisitedNodes());
-            if (result == null) throw new InvalidOperationException("Unreachable destination");
+            if (result == NoPath) throw new InvalidOperationException("Unreachable destination");
             return result;
         }
 
         internal Path Path(Node destination, IList<Node> visitedNodes)
         {
-            if (this == destination) return new Path();
-            if (visitedNodes.Contains(this)) return null;
-            if (_links.Count == 0) return null;
+            if (this == destination) return new Path.ActualPath();
+            if (visitedNodes.Contains(this)) return NoPath;
+            if (_links.Count == 0) return NoPath;
             return _links
                 .ConvertAll(link => link.Path(destination, CopyWithThis(visitedNodes)))
                 .Min();

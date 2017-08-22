@@ -32,7 +32,7 @@ namespace OoBootCamp.Graph
 
         internal Path Path(Node destination, List<Node> visitedNodes)
         {
-            return _target.Path(destination, visitedNodes)?.Prepend(this);
+            return _target.Path(destination, visitedNodes).Prepend(this);
         }
 
         public static double TotalCost(List<Link> links)
