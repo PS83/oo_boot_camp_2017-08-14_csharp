@@ -20,11 +20,6 @@ namespace OoBootCamp.Graph
             _cost = cost;
         }
 
-        internal Path Path(Node destination, List<Node> visitedNodes, IComparer<Path> strategy)
-        {
-            return _target.Path(destination, visitedNodes, strategy).Prepend(this);
-        }
-
         internal List<Path> Paths(Node destination, List<Node> visitedNodes)
         {
             return _target

@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static OoBootCamp.Graph.Path;
-// ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace OoBootCamp.Graph
 {
@@ -15,7 +14,6 @@ namespace OoBootCamp.Graph
     public class Node
     {
         private readonly List<Link> _links = new List<Link>();
-        private static readonly Path NoPath = new NoPath();
 
         public Node To(Node neighbour, double cost)
         {
@@ -25,7 +23,7 @@ namespace OoBootCamp.Graph
 
         public bool CanReach(Node destination)
         {
-            return Path(destination, NoVisitedNodes(), LeastCost) != NoPath;
+            return Paths(destination).Any();
         }
 
         public int HopCount(Node destination)
@@ -43,36 +41,26 @@ namespace OoBootCamp.Graph
             return Path(destination, LeastCost);
         }
 
-        private Path Path(Node destination, IComparer<Path> strategy)
-        {
-            var result = Path(destination, NoVisitedNodes(), strategy);
-            if (result == NoPath) throw new InvalidOperationException("Unreachable destination");
-            return result;
-        }
-
-        internal Path Path(Node destination, IList<Node> visitedNodes, IComparer<Path> strategy)
-        {
-            if (this == destination) return new ActualPath();
-            if (visitedNodes.Contains(this)) return NoPath;
-            if (_links.Count == 0) return NoPath;
-            var neighborPaths = _links
-                .ConvertAll(link => link.Path(destination, CopyWithThis(visitedNodes), strategy));
-            neighborPaths.Sort(strategy);
-            return neighborPaths.First();
-        }
-
-        public IList<Path> Paths(Node destination)
+        public List<Path> Paths(Node destination)
         {
             return Paths(destination, NoVisitedNodes());
         }
 
-        internal IList<Path> Paths(Node destination, IList<Node> visitedNodes)
+        internal List<Path> Paths(Node destination, IList<Node> visitedNodes)
         {
             if (this == destination) return new List<Path>{new ActualPath()};
             if (visitedNodes.Contains(this)) return new List<Path>();
             return _links
                 .SelectMany(link => link.Paths(destination, CopyWithThis(visitedNodes)))
                 .ToList();
+        }
+
+        private Path Path(Node destination, IComparer<Path> strategy)
+        {
+            var results = Paths(destination);
+            if (!results.Any()) throw new InvalidOperationException("Unreachable destination");
+            results.Sort(strategy);
+            return results.First();
         }
 
         private IList<Node> NoVisitedNodes()
