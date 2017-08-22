@@ -24,10 +24,10 @@ namespace OoBootCamp.Tests.Graph
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            B.Cost(6).To(A);
-            B.Cost(7).To(C).Cost(5).To(D).Cost(2).To(E).Cost(3).To(B).Cost(4).To(F);
-            C.Cost(1).To(D);
-            C.Cost(8).To(E);
+            B.To(A, cost: 6);
+            B.To(C, cost: 7).To(D, cost: 5).To(E, cost: 2).To(B, cost: 3).To(F, cost: 4);
+            C.To(D, cost: 1);
+            C.To(E, cost: 8);
         }
 
         [Test]
@@ -69,10 +69,10 @@ namespace OoBootCamp.Tests.Graph
         [Test]
         public void Path()
         {
-            AssertPath(A, A, 0, 0);
-            AssertPath(B, A, 1, 6);
-            AssertPath(B, F, 1, 4);
-            AssertPath(C, F, 4, 10);
+            AssertPath(A, A, expectedHopCount: 0, expectedCost: 0);
+            AssertPath(B, A, expectedHopCount: 1, expectedCost: 6);
+            AssertPath(B, F, expectedHopCount: 1, expectedCost: 4);
+            AssertPath(C, F, expectedHopCount: 4, expectedCost: 10);
             Assert.Throws<InvalidOperationException>(delegate { A.Path(B); });
             Assert.Throws<InvalidOperationException>(delegate { G.Path(B); });
             Assert.Throws<InvalidOperationException>(delegate { B.Path(G); });
