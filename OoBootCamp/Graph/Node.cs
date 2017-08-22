@@ -6,8 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static OoBootCamp.Graph.Link;
-//using static OoBootCamp.Graph.Path;
+using static OoBootCamp.Graph.Path;
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace OoBootCamp.Graph
@@ -16,8 +15,7 @@ namespace OoBootCamp.Graph
     public class Node
     {
         private readonly List<Link> _links = new List<Link>();
-        private const double Unreachable = Double.PositiveInfinity;
-        private static readonly Path NoPath = new Path.NoPath();
+        private static readonly Path NoPath = new NoPath();
 
         public Node To(Node neighbour, double cost)
         {
@@ -27,44 +25,22 @@ namespace OoBootCamp.Graph
 
         public bool CanReach(Node destination)
         {
-            return Cost(destination, NoVisitedNodes(), LeastCost) != Unreachable;
-        }
-
-        private IList<Node> NoVisitedNodes()
-        {
-            return new List<Node>();
+            return Path(destination, NoVisitedNodes(), LeastCost) != NoPath;
         }
 
         public int HopCount(Node destination)
         {
-            return (int)Cost(destination, FewestHops);
+            return Path(destination, FewestHops).HopCount();
         }
 
         public double Cost(Node destination)
         {
-            return Cost(destination, LeastCost);
-        }
-
-        private double Cost(Node destination, CostStrategy strategy)
-        {
-            var result = Cost(destination, NoVisitedNodes(), strategy);
-            if (result == Unreachable) throw new InvalidOperationException("Unreachable destination");
-            return result;
-        }
-
-        internal double Cost(Node destination, IList<Node> visitedNodes, CostStrategy strategy)
-        {
-            if (this == destination) return 0;
-            if (visitedNodes.Contains(this)) return Unreachable;
-            if (_links.Count == 0) return Unreachable;
-            return _links
-                .ConvertAll(link => link.Cost(destination, CopyWithThis(visitedNodes), strategy))
-                .Min();
+            return Path(destination).Cost();
         }
 
         public Path Path(Node destination)
         {
-            return Path(destination, Graph.Path.LeastCost);
+            return Path(destination, LeastCost);
         }
 
         private Path Path(Node destination, IComparer<Path> strategy)
@@ -76,13 +52,18 @@ namespace OoBootCamp.Graph
 
         internal Path Path(Node destination, IList<Node> visitedNodes, IComparer<Path> strategy)
         {
-            if (this == destination) return new Path.ActualPath();
+            if (this == destination) return new ActualPath();
             if (visitedNodes.Contains(this)) return NoPath;
             if (_links.Count == 0) return NoPath;
             var neighborPaths = _links
                 .ConvertAll(link => link.Path(destination, CopyWithThis(visitedNodes), strategy));
             neighborPaths.Sort(strategy);
             return neighborPaths.First();
+        }
+
+        private IList<Node> NoVisitedNodes()
+        {
+            return new List<Node>();
         }
 
         private List<Node> CopyWithThis(IList<Node> originalNodes)

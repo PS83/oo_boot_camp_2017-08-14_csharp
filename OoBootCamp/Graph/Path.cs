@@ -13,6 +13,8 @@ namespace OoBootCamp.Graph
     {
         public static IComparer<Path> LeastCost =
             Comparer<Path>.Create((left, right) => left.Cost().CompareTo(right.Cost()));
+        public static IComparer<Path> FewestHops =
+            Comparer<Path>.Create((left, right) => left.HopCount().CompareTo(right.HopCount()));
 
         public abstract int HopCount();
 
