@@ -86,3 +86,13 @@ namespace OoBootCamp.Tests.Graph
         }
     }
 }
+
+/*
+ *  Size Scorecard  Path()  
+ *      Classes     5 + 2  
+ *      Methods     22    
+ *      xLOC        34      
+ *      Avg mthd    1.5     
+ *      Test LOC    42      
+ *      % Test LOC  55%     
+ */
