@@ -61,6 +61,20 @@ namespace OoBootCamp.Graph
             return neighborPaths.First();
         }
 
+        public IList<Path> Paths(Node destination)
+        {
+            return Paths(destination, NoVisitedNodes());
+        }
+
+        internal IList<Path> Paths(Node destination, IList<Node> visitedNodes)
+        {
+            if (this == destination) return new List<Path>{new ActualPath()};
+            if (visitedNodes.Contains(this)) return new List<Path>();
+            return _links
+                .SelectMany(link => link.Paths(destination, CopyWithThis(visitedNodes)))
+                .ToList();
+        }
+
         private IList<Node> NoVisitedNodes()
         {
             return new List<Node>();

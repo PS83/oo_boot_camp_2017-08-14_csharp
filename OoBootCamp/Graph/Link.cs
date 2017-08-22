@@ -25,6 +25,14 @@ namespace OoBootCamp.Graph
             return _target.Path(destination, visitedNodes, strategy).Prepend(this);
         }
 
+        internal List<Path> Paths(Node destination, List<Node> visitedNodes)
+        {
+            return _target
+                .Paths(destination, visitedNodes)
+                .Select(p => p.Prepend(this))
+                .ToList();
+        }
+
         public static double TotalCost(List<Link> links)
         {
             return links.Sum(link => link._cost);
