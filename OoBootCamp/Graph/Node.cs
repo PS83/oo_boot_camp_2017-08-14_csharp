@@ -48,7 +48,7 @@ namespace OoBootCamp.Graph
 
         internal List<Path> Paths(Node destination, IList<Node> visitedNodes)
         {
-            if (this == destination) return new List<Path>{new ActualPath()};
+            if (this == destination) return new List<Path>{new Path()};
             if (visitedNodes.Contains(this)) return new List<Path>();
             return _links
                 .SelectMany(link => link.Paths(destination, CopyWithThis(visitedNodes)))

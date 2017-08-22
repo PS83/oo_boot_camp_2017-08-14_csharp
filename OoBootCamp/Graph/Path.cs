@@ -3,69 +3,34 @@
  * May be used freely except for training; license required for training.
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace OoBootCamp.Graph
 {
     // Understands a specific route from one Node to another Node
-    public abstract class Path : IComparable<Path>
+    public class Path
     {
         public static IComparer<Path> LeastCost =
             Comparer<Path>.Create((left, right) => left.Cost().CompareTo(right.Cost()));
         public static IComparer<Path> FewestHops =
             Comparer<Path>.Create((left, right) => left.HopCount().CompareTo(right.HopCount()));
 
-        public abstract int HopCount();
+        private readonly List<Link> _links = new List<Link>();
 
-        public abstract double Cost();
-
-        internal abstract Path Prepend(Link link);
-
-        public int CompareTo(Path other)
+        public int HopCount()
         {
-            return this.Cost().CompareTo(other.Cost());
+            return _links.Count;
         }
 
-        internal class ActualPath : Path
+        public double Cost()
         {
-
-            private readonly List<Link> _links = new List<Link>();
-
-            public override int HopCount()
-            {
-                return _links.Count;
-            }
-
-            public override double Cost()
-            {
-                return Link.TotalCost(_links);
-            }
-
-            internal override Path Prepend(Link link)
-            {
-                _links.Insert(0, link);
-                return this;
-            }
+            return Link.TotalCost(_links);
         }
 
-        internal class NoPath : Path
+        internal Path Prepend(Link link)
         {
-
-            public override int HopCount()
-            {
-                return Int32.MaxValue;
-            }
-
-            public override double Cost()
-            {
-                return double.PositiveInfinity;
-            }
-
-            internal override Path Prepend(Link ignore)
-            {
-                return this;
-            }
+            _links.Insert(0, link);
+            return this;
         }
     }
 }
